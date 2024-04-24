@@ -1,0 +1,26 @@
+{
+  "name": "clients-api",
+  "version": "1.0.0",
+  "description": "A RESTful service for efficient client management. Features CRUD operations and data validation. Built with JavaScript, Express, Zod and Prisma, utilizing a Postgres database for data storage and following good coding practices. Includes unit tests and detailed documentation.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app.js",
+		"dev": "node --watch app.js"
+  },
+  "keywords": [
+    "client",
+    "management",
+    "api",
+    "restful"
+  ],
+  "author": "Emmanuel Espinal Ceballos",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "5.13.0",
+    "dotenv": "16.4.5",
+    "express": "4.19.2",
+    "prisma": "5.13.0"
+  }
+}
