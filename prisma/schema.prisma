@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName     String  @map("first_name") @db.VarChar(50)
+  middleName    String? @map("middle_name") @db.VarChar(50)
+  firstSurname  String  @map("first_surname") @db.VarChar(50)
+  secondSurname String? @map("second_surname") @db.VarChar(50)
+  email         String  @db.VarChar(100)
+  address       String
+  phone         String  @db.VarChar(15)
+  country       String  @db.VarChar(50)
+  demonym       String  @db.VarChar(50)
+
+  @@map("client")
+}
