@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import { ClientModel } from './models/client.js'
+import ClientModel from './models/client.js'
 import { createClientRouter } from './routes/clients.js'
 import 'dotenv/config'
 

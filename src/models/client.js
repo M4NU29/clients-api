@@ -3,12 +3,12 @@ import 'dotenv/config'
 
 const prisma = new PrismaClient()
 
-export class ClientModel {
+export default class ClientModel {
 	static async create(client) {
 		// Create a new client
 		const {
 			firstName,
-			secondName,
+			middleName,
 			firstSurname,
 			secondSurname,
 			email,
@@ -21,7 +21,7 @@ export class ClientModel {
 			const newClient = await prisma.client.create({
 				data: {
 					firstName: firstName,
-					secondName: secondName ?? null,
+					middleName: middleName ?? null,
 					firstSurname: firstSurname,
 					secondSurname: secondSurname ?? null,
 					email: email,
@@ -42,6 +42,7 @@ export class ClientModel {
 					return { error: 'A client with that email already exists' }
 				}
 			}
+			
 			return { error: 'An error occurred while creating the client' }
 		}
 	}
