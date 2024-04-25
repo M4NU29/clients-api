@@ -4,7 +4,6 @@ import {
 } from '../src/middlewares/client-validation.js'
 
 describe('Client validation', () => {
-	// Test validateClient
 	describe('validateClient', () => {
 		it('should validate a client with valid data', () => {
 			const validClient = {
@@ -37,7 +36,6 @@ describe('Client validation', () => {
 		})
 	})
 
-	// Test validateClientPartially
 	describe('validateClientPartially', () => {
 		it('should validate partial client info with valid data', () => {
 			const validPartialClient = {

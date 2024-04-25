@@ -4,8 +4,8 @@ import 'dotenv/config'
 const prisma = new PrismaClient()
 
 export default class ClientModel {
+	// Create a new client
 	static async create(client) {
-		// Create a new client
 		const {
 			firstName,
 			middleName,
@@ -15,7 +15,7 @@ export default class ClientModel {
 			address,
 			phone,
 			country
-		} = client
+		} = client // Destructure the client object
 
 		try {
 			const newClient = await prisma.client.create({
@@ -28,9 +28,10 @@ export default class ClientModel {
 					address: address,
 					phone: phone,
 					country: country,
+					// Fetch the demonym from the Rest Countries API based on the country code
 					demonym: await fetch(`https://restcountries.com/v3.1/alpha/${country}?fields=demonyms`)
 						.then(response => response.json())
-						.then(data => data.demonyms.eng.m)
+						.then(data => data.demonyms.eng.m) // Get the demonym from the response
 				}
 			})
 
@@ -38,7 +39,7 @@ export default class ClientModel {
 
 		} catch (error) {
 			if (error instanceof Prisma.PrismaClientKnownRequestError) {
-				if (error.code === 'P2002') {
+				if (error.code === 'P2002') { // Check if the error is a duplicate key error
 					return { error: 'A client with that email already exists' }
 				}
 			}
@@ -47,20 +48,22 @@ export default class ClientModel {
 		}
 	}
 
+	// Get all clients
 	static async getAll(country, page = 1, perPage = 10) {
-		// Get all clients
 		page = parseInt(page)
 		perPage = parseInt(perPage)
 
 		const totalClients = await prisma.client.count({
+			// If country is provided, filter by country
 			where: country ? { country: country } : {}
 		})
 		const totalPages = Math.ceil(totalClients / perPage)
 
 		let clients = await prisma.client.findMany({
+			// If country is provided, filter by country
 			where: country ? { country: country } : {},
-			skip: (page - 1) * perPage,
-			take: perPage
+			skip: (page - 1) * perPage, // Skip the first N clients
+			take: perPage // Take only N clients
 		})
 
 		return {
@@ -72,8 +75,8 @@ export default class ClientModel {
 		}
 	}
 
+	// Get a client by id
 	static async getById(id) {
-		// Get a client by id
 		try {
 			const client = await prisma.client.findUnique({
 				where: {
@@ -92,15 +95,18 @@ export default class ClientModel {
 		}
 	}
 
+	// Update a client
 	static async update(id, input) {
-		// Update a client
+		// Destructure the input object
 		const { email, address, phone, country } = input
+		// Create an object with the data to update
 		const data = { email, address, phone, country }
 
 		if (country) {
+			// If country is updated, fetch the demonym from the Rest Countries API based on the country code
 			data.demonym = await fetch(`https://restcountries.com/v3.1/alpha/${country}?fields=demonyms`)
 				.then(response => response.json())
-				.then(data => data.demonyms.eng.m)
+				.then(data => data.demonyms.eng.m) // Get the demonym from the response
 		}
 
 		try {
@@ -115,7 +121,7 @@ export default class ClientModel {
 
 		} catch (error) {
 			if (error instanceof Prisma.PrismaClientKnownRequestError) {
-				if (error.code === 'P2002') {
+				if (error.code === 'P2002') { // Check if the error is a duplicate key error
 					return { error: 'A client with that email already exists' }
 				}
 
@@ -126,8 +132,8 @@ export default class ClientModel {
 		}
 	}
 
+	// Delete a client
 	static async delete(id) {
-		// Delete a client
 		try {
 			const client = await prisma.client.delete({
 				where: {
