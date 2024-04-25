@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 git clone https://github.com/M4NU29/clients-api.git
 ```
 2. Install packages
-```
+```bash
 npm install
 # or
 pnpm install
@@ -29,17 +29,17 @@ yarn install
 ```
 
 3. Create a `.env` file in the root directory and add your PostgreSQL connection string as `DATABASE_URL`
-```
+```bash
 DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
 ```
 
 4. Run the database migrations
-```
+```bash
 npx prisma migrate dev
 ```
 
 5. Start the server
-```
+```bash
 npm run start
 # or
 pnpm run start
@@ -84,7 +84,7 @@ All routes are prefixed with `/clients`.
 ### Validation
 
 The client data is validated using the Zod library. The validation schema is as follows:
-```
+```js
 const clientSchema = z.object({
     firstName: z.string().min(1).max(50),
     middleName: z.string().max(50).nullable().optional(),
