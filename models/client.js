@@ -6,12 +6,28 @@ const prisma = new PrismaClient()
 export class ClientModel {
 	static async create(client) {
 		// Create a new client
-		const { country } = client
+		const {
+			firstName,
+			secondName,
+			firstSurname,
+			secondSurname,
+			email,
+			address,
+			phone,
+			country
+		} = client
 
 		try {
 			const newClient = await prisma.client.create({
 				data: {
-					...client,
+					firstName: firstName,
+					secondName: secondName ?? null,
+					firstSurname: firstSurname,
+					secondSurname: secondSurname ?? null,
+					email: email,
+					address: address,
+					phone: phone,
+					country: country,
 					demonym: await fetch(`https://restcountries.com/v3.1/alpha/${country}?fields=demonyms`)
 						.then(response => response.json())
 						.then(data => data.demonyms.eng.m)
@@ -61,17 +77,15 @@ export class ClientModel {
 		}
 	}
 
-	static async update(id, data) {
+	static async update(id, input) {
 		// Update a client
-		const { country } = data
+		const { email, address, phone, country } = input
+		const data = { email, address, phone, country }
 
 		if (country) {
-			data = {
-				...data,
-				demonym: await fetch(`https://restcountries.com/v3.1/alpha/${country}?fields=demonyms`)
-					.then(response => response.json())
-					.then(data => data.demonyms.eng.m)
-			}
+			data.demonym = await fetch(`https://restcountries.com/v3.1/alpha/${country}?fields=demonyms`)
+				.then(response => response.json())
+				.then(data => data.demonyms.eng.m)
 		}
 
 		try {

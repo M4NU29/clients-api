@@ -18,14 +18,14 @@ GET http://localhost:3000/clients
 GET http://localhost:3000/clients?country=DO
 
 ### Get client by id
-GET http://localhost:3000/clients/f2543ed9-00bf-4c1c-81fb-34bf276fcb6c
+GET http://localhost:3000/clients/a1d24fa8-0227-4fc7-9d63-36fae8430e7b
 
 ### Update client
 PUT http://localhost:3000/clients/a1d24fa8-0227-4fc7-9d63-36fae8430e7b
 Content-Type: application/json
 
 {
-	"phone": "8296713548"
+	"country": "US"
 }
 
 ### Delete client
