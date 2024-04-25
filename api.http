@@ -12,10 +12,10 @@ Content-Type: application/json
 }
 
 ### Get all clients
-GET http://localhost:3000/clients
+GET http://localhost:3000/clients?page=1&per_page=10
 
 ### Get clients by country
-GET http://localhost:3000/clients?country=DO
+GET http://localhost:3000/clients?country=US
 
 ### Get client by id
 GET http://localhost:3000/clients/a1d24fa8-0227-4fc7-9d63-36fae8430e7b

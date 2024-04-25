@@ -20,8 +20,8 @@ export class ClientController {
 	}
 
 	getAll = async (req, res) => {
-		const { country } = req.query
-		const clients = await this.clientModel.getAll(country)
+		const { country, page, per_page} = req.query
+		const clients = await this.clientModel.getAll(country, page, per_page)
 		return res.json(clients)
 	}
 
