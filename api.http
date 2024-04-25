@@ -1,0 +1,32 @@
+### Create client
+POST http://localhost:3000/clients
+Content-Type: application/json
+
+{
+	"firstName": "Miguel",
+	"firstSurname": "Santos",
+	"email": "r4fa@gmail.com",
+	"address": "24 0404 Santo Domingo",
+	"phone": "8294635157",
+	"country": "US"
+}
+
+### Get all clients
+GET http://localhost:3000/clients
+
+### Get clients by country
+GET http://localhost:3000/clients?country=DO
+
+### Get client by id
+GET http://localhost:3000/clients/f2543ed9-00bf-4c1c-81fb-34bf276fcb6c
+
+### Update client
+PUT http://localhost:3000/clients/a1d24fa8-0227-4fc7-9d63-36fae8430e7b
+Content-Type: application/json
+
+{
+	"phone": "8296713548"
+}
+
+### Delete client
+DELETE http://localhost:3000/clients/0496778b-b372-4c63-bef9-9965be82ccf5
