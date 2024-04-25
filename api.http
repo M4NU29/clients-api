@@ -4,6 +4,7 @@ Content-Type: application/json
 
 {
 	"firstName": "Manuel",
+	"middleName": "Antonio",
 	"firstSurname": "García",
 	"email": "manu@gmail.com",
 	"address": "25 Villas Agrícolas, Santo Domingo",

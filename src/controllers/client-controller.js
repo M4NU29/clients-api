@@ -16,6 +16,11 @@ export class ClientController {
 		}
 
 		const newClient = await this.clientModel.create(client.data)
+
+		if (newClient.error) {
+			return res.status(400).json({ error: newClient.error })
+		}
+
 		return res.status(201).json(newClient)
 	}
 
@@ -46,8 +51,8 @@ export class ClientController {
 
 		const updatedClient = await this.clientModel.update(id, client.data)
 
-		if (!updatedClient) {
-			return res.status(404).json({ error: 'Client not found' })
+		if (updatedClient.error) {
+			return res.status(404).json({ error: updatedClient.error })
 		}
 
 		return res.json(updatedClient)
@@ -57,8 +62,8 @@ export class ClientController {
 		const { id } = req.params
 		const deletedClient = await this.clientModel.delete(id)
 
-		if (!deletedClient) {
-			return res.status(404).json({ error: 'Client not found' })
+		if (deletedClient.error) {
+			return res.status(404).json({ error: deletedClient.error })
 		}
 
 		return res.json({
