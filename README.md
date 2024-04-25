@@ -57,12 +57,20 @@ All routes are prefixed with `/clients`.
 | Method   | Endpoint | Description          |
 |----------|----------|----------------------|
 | `POST`   | `/`      | Create a new client |
-| `GET`    | `/`      | Get all clients      |
+| `GET`    | `/`      | Get all clients. Supports pagination with `page` and `per_page` query parameters.      |
 | `GET`    | `/:id`   | Get a client by ID   |
 | `PUT`    | `/:id`   | Update a client      |
 | `DELETE` | `/:id`   | Delete a client      |
 
+**Pagination**
 
+The `GET /clients` endpoint supports pagination. You can specify the page number and the number of items per page with the page and per_page query parameters respectively. For example, to get the first 10 clients, you would use `/clients?page=1&per_page=10`.
+
+**Filtering**
+
+The `GET /clients` endpoint also supports filtering by country. You can specify the country with the country query parameter. For example, to get all clients from the Dominican Republic, you would use `/clients?country=DO`.
+
+You can also combine filtering and pagination. For example, to get the first 10 clients from the Dominican Republic, you would use `/clients?country=DO&page=1&per_page=10`.
 
 ### Models
 
@@ -80,6 +88,10 @@ All routes are prefixed with `/clients`.
 | `phone`        | `string` | The client's phone number             |
 | `country`      | `string` | The client's country (ISO 3166 alpha-2 code) |
 | `demonym`      | `string` | The client's demonym                  |
+
+**Demonym**
+
+This application uses the [REST Countries API](https://restcountries.com/) to fetch the demonym associated with the country code of each client. The country code is validated using the `iso-3166` library and then used to fetch the corresponding demonym from the endpoint `https://restcountries.com/v3.1/alpha/${country}?fields=demonyms`. This process happens automatically when creating or updating a client.
 
 ### Validation
 
@@ -105,3 +117,46 @@ const clientSchema = z.object({
 ### Error handling
 
 Errors are handled in the controllers and models. If an error occurs, the API will return a JSON response with the error message.
+
+### Testing
+
+This project uses Jest and Supertest for testing. There are two types of tests: API tests and validation tests.
+
+**API Tests**
+
+API tests are located in `./tests/app.test.js`. They test the API endpoints and ensure they are working as expected.
+
+**Validation Tests**
+
+Validation tests are located in `./tests/client-validation.test.js`. They test the client data validation logic to ensure it correctly validates the data.
+
+To run all tests, use the following command:
+```bash
+npm run test
+# or
+pnpm run test
+# or
+bun run test
+# or
+yarn run test
+```
+
+### Dependencies
+
+This project uses several dependencies to provide its functionality:
+
+- **Express.js**: A fast, unopinionated, and flexible Node.js web application framework. It is used to create the API endpoints.
+
+- **Prisma**: An open-source database toolkit and ORM. It is used to interact with the database.
+
+- **dotenv**: A zero-dependency module that loads environment variables from a `.env` file into `process.env`. It is used to manage environment variables.
+
+- **Zod**: A JavaScript library for building schemas and validating data. It is used for data validation in this project.
+
+- **iso-3166**: A library for validating and working with ISO 3166 country codes. It is used to validate the `country` field in the client data.
+
+- **Jest**: A delightful JavaScript Testing Framework with a focus on simplicity. It is used to write and run the tests.
+
+- **Supertest**: A high-level abstraction for testing HTTP. It is used in conjunction with Jest to test the API endpoints.
+
+- **Eslint**: A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. It is used to maintain code quality and find problems.
