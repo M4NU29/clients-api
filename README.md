@@ -22,7 +22,7 @@ git clone https://github.com/M4NU29/clients-api.git
 npm install
 ```
 
-3. Create a `.env` file in the root directory and add your PostgreSQL connection string as `DATABASE_URL` and specify the `PORT` on which the server will run
+3. Create a `.env` file in the root directory, add your PostgreSQL connection string as `DATABASE_URL` and specify the `PORT` on which the server will run
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
 PORT=3000
