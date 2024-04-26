@@ -1,7 +1,7 @@
 import {
 	validateClient,
 	validateClientPartially
-} from '../src/middlewares/client-validation.js'
+} from '../src/middleware/client-validation.js'
 
 describe('Client validation', () => {
 	describe('validateClient', () => {

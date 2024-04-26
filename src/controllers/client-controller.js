@@ -1,7 +1,7 @@
 import {
 	validateClient,
 	validateClientPartially
-} from '../middlewares/client-validation.js'
+} from '../middleware/client-validation.js'
 
 export class ClientController {
 	constructor(clientModel) {
@@ -27,8 +27,8 @@ export class ClientController {
 	}
 
 	getAll = async (req, res) => {
-		const { country, page, per_page } = req.query // Get the specified query parameters
-		const clients = await this.clientModel.getAll(country, page, per_page)
+		const { country, page, limit } = req.query // Get the specified query parameters
+		const clients = await this.clientModel.getAll(country, page, limit)
 		return res.json(clients)
 	}
 

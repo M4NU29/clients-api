@@ -49,28 +49,28 @@ export default class ClientModel {
 	}
 
 	// Get all clients
-	static async getAll(country, page = 1, perPage = 10) {
+	static async getAll(country, page = 1, limit = 10) {
 		page = parseInt(page)
-		perPage = parseInt(perPage)
+		limit = parseInt(limit)
 
 		const totalClients = await prisma.client.count({
 			// If country is provided, filter by country
 			where: country ? { country: country } : {}
 		})
-		const totalPages = Math.ceil(totalClients / perPage)
+		const totalPages = Math.ceil(totalClients / limit)
 
 		let clients = await prisma.client.findMany({
 			// If country is provided, filter by country
 			where: country ? { country: country } : {},
-			skip: (page - 1) * perPage, // Skip the first N clients
-			take: perPage // Take only N clients
+			skip: (page - 1) * limit, // Skip the first N clients
+			take: limit // Take only N clients
 		})
 
 		return {
 			page,
-			per_page: perPage,
-			total_count: totalClients,
-			total_pages: totalPages,
+			limit,
+			totalItems: totalClients,
+			totalPages,
 			clients
 		}
 	}

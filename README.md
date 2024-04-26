@@ -20,39 +20,22 @@ git clone https://github.com/M4NU29/clients-api.git
 2. Install packages
 ```bash
 npm install
-# or
-pnpm install
-# or
-bun install
-#or
-yarn install
 ```
 
-3. Create a `.env` file in the root directory and add your PostgreSQL connection string as `DATABASE_URL`
-```bash
-DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
-```
-
-4. In the just created `.env` file, specify the `PORT` on which the server will run. The `.env` file should look similar to this:
+3. Create a `.env` file in the root directory and add your PostgreSQL connection string as `DATABASE_URL` and specify the `PORT` on which the server will run
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
 PORT=3000
 ```
 
-5. Run the database migrations
+4. Run the database migrations
 ```bash
 npx prisma migrate dev
 ```
 
-6. Start the server
+5. Start the server
 ```bash
 npm run start
-# or
-pnpm run start
-# or
-bun run start
-# or
-yarn run start
 ```
 
 ### API Endpoints
@@ -63,20 +46,20 @@ All routes are prefixed with `/clients`.
 | Method   | Endpoint | Description          |
 |----------|----------|----------------------|
 | `POST`   | `/`      | Create a new client |
-| `GET`    | `/`      | Get all clients. Supports pagination with `page` and `per_page` query parameters.      |
+| `GET`    | `/`      | Get all clients. Supports pagination with `page` and `limit` query parameters.      |
 | `GET`    | `/:id`   | Get a client by ID   |
 | `PUT`    | `/:id`   | Update a client      |
 | `DELETE` | `/:id`   | Delete a client      |
 
 **Pagination**
 
-The `GET /clients` endpoint supports pagination. You can specify the page number and the number of items per page with the page and per_page query parameters respectively. For example, to get the first 10 clients, you would use `/clients?page=1&per_page=10`.
+The `GET /clients` endpoint supports pagination. You can specify the page number and the number of items per page with the page and per_page query parameters respectively. For example, to get the first 10 clients, you would use `/clients?page=1&limit=10`.
 
 **Filtering**
 
 The `GET /clients` endpoint also supports filtering by country. You can specify the country with the country query parameter. For example, to get all clients from the Dominican Republic, you would use `/clients?country=DO`.
 
-You can also combine filtering and pagination. For example, to get the first 10 clients from the Dominican Republic, you would use `/clients?country=DO&page=1&per_page=10`.
+You can also combine filtering and pagination. For example, to get the first 10 clients from the Dominican Republic, you would use `/clients?country=DO&page=1&limit=10`.
 
 ### Models
 
@@ -139,12 +122,6 @@ Validation tests are located in `./tests/client-validation.test.js`. They test t
 To run all tests, use the following command:
 ```bash
 npm run test
-# or
-pnpm run test
-# or
-bun run test
-# or
-yarn run test
 ```
 
 ### Dependencies
