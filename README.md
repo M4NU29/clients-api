@@ -26,7 +26,7 @@ npm install
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
 PORT=3000
-ALLOWED_ORIGINS=http://localhost:1234,https://myapp.com,https://myapp.net
+ALLOWED_ORIGINS="http://localhost:1234,https://myapp.com,https://myapp.net"
 ```
 
 4. Run the database migrations
