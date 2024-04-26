@@ -30,15 +30,21 @@ yarn install
 
 3. Create a `.env` file in the root directory and add your PostgreSQL connection string as `DATABASE_URL`
 ```bash
-DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
+DATABASE_URL=postgresql://user:password@localhost:3000/mydb?schema=public
 ```
 
-4. Run the database migrations
+4. In the just created `.env` file, specify the `PORT` on which the server will run. The `.env` file should look similar to this:
+```bash
+DATABASE_URL=postgresql://user:password@localhost:3000/mydb?schema=public
+PORT=3000
+```
+
+5. Run the database migrations
 ```bash
 npx prisma migrate dev
 ```
 
-5. Start the server
+6. Start the server
 ```bash
 npm run start
 # or
