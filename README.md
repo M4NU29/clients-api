@@ -22,10 +22,11 @@ git clone https://github.com/M4NU29/clients-api.git
 npm install
 ```
 
-3. Create a `.env` file in the root directory, add your PostgreSQL connection string as `DATABASE_URL` and specify the `PORT` on which the server will run
+3. Create a `.env` file in the root directory, add your PostgreSQL connection string as `DATABASE_URL`, specify the `PORT` on which the server will run and add `ALLOWED_ORIGINS` to specify the origins that are allowed to access your API. In `ALLOWED_ORIGINS`, you can list multiple origins separated by commas. This will be used for the CORS configuration of your server
 ```bash
 DATABASE_URL="postgresql://user:password@localhost:3000/mydb?schema=public"
 PORT=3000
+ALLOWED_ORIGINS=http://localhost:1234,https://myapp.com,https://myapp.net
 ```
 
 4. Run the database migrations
@@ -129,6 +130,8 @@ npm run test
 This project uses several dependencies to provide its functionality:
 
 - **Express.js**: A fast, unopinionated, and flexible Node.js web application framework. It is used to create the API endpoints.
+
+- **CORS**: A Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. It is used to handle Cross-Origin Resource Sharing in this project.
 
 - **Prisma**: An open-source database toolkit and ORM. It is used to interact with the database.
 
